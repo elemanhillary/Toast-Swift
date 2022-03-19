@@ -475,10 +475,10 @@ public extension UIView {
             messageLabel?.textColor = style.messageColor
             messageLabel?.backgroundColor = UIColor.clear
             
-            let maxMessageSize = CGSize(width: (self.bounds.size.width * style.maxWidthPercentage) - imageRect.size.width, height: self.bounds.size.height * style.maxHeightPercentage)
+            let maxMessageSize = CGSize(width: UIScreen.main.bounds.width, height: self.bounds.size.height * style.maxHeightPercentage)
             let messageSize = messageLabel?.sizeThatFits(maxMessageSize)
             if let messageSize = messageSize {
-                let actualWidth = min(messageSize.width, maxMessageSize.width)
+                let actualWidth = messageSize.width * 0.9
                 let actualHeight = min(messageSize.height, maxMessageSize.height)
                 messageLabel?.frame = CGRect(x: 0.0, y: 0.0, width: actualWidth, height: actualHeight)
             }
@@ -507,7 +507,8 @@ public extension UIView {
         let wrapperWidth = max((imageRect.size.width + (style.horizontalPadding * 2.0)), (longerX + longerWidth + style.horizontalPadding))
         let wrapperHeight = max((messageRect.origin.y + messageRect.size.height + style.verticalPadding), (imageRect.size.height + (style.verticalPadding * 2.0)))
         
-        wrapperView.frame = CGRect(x: 0.0, y: 0.0, width: wrapperWidth, height: wrapperHeight)
+        wrapperView.frame = CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: wrapperHeight)
+        wrapperView.frame = wrapperView.frame.insetBy(dx: 10.0, dy: 0.0)
         
         if let titleLabel = titleLabel {
             titleRect.size.width = longerWidth
