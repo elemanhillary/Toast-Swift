@@ -475,10 +475,10 @@ public extension UIView {
             messageLabel?.textColor = style.messageColor
             messageLabel?.backgroundColor = UIColor.clear
             
-            let maxMessageSize = CGSize(width: UIScreen.main.bounds.width, height: self.bounds.size.height * style.maxHeightPercentage)
+            let maxMessageSize = CGSize(width: UIScreen.main.bounds.width * 0.9, height: self.bounds.size.height * style.maxHeightPercentage)
             let messageSize = messageLabel?.sizeThatFits(maxMessageSize)
             if let messageSize = messageSize {
-                let actualWidth = messageSize.width * 0.9
+                let actualWidth = messageSize.width
                 let actualHeight = min(messageSize.height, maxMessageSize.height)
                 messageLabel?.frame = CGRect(x: 0.0, y: 0.0, width: actualWidth, height: actualHeight)
             }
@@ -517,7 +517,6 @@ public extension UIView {
         }
         
         if let messageLabel = messageLabel {
-            messageRect.size.width = longerWidth
             messageLabel.frame = messageRect
             wrapperView.addSubview(messageLabel)
         }
